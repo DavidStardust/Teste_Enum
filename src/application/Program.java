@@ -21,7 +21,7 @@ public class Program {
 		
 		System.out.println("Enter department's name: ");
 		String departmentName = sc.nextLine();
-		System.out.print("Enter worker data:");
+		System.out.println("Enter worker data:");
 		System.out.println("Name:");
 		String workerName = sc.nextLine();
 		System.out.println("Level:");
@@ -47,9 +47,19 @@ public class Program {
 			//Instanciar o contrato
 			HourContract contract = new HourContract(contractDate, valuePerHour, hours);
 			//associação do contrato com o trabalhador
-			worker.addContratct(contract);
+			worker.addContract(contract);
 		}
-			System.out.println(worker); 
+		
+		System.out.println();
+		System.out.print("Enter month and year to calculate income (MM/YYYY): ");
+		String monthAndYear = sc.next();
+		//recortar o string, pegar os dois primeiros caracteres, converter para mês e guardar na váriavel mês, o mesmo para ano
+		int month = Integer.parseInt(monthAndYear.substring(0, 2));
+		int year = Integer.parseInt(monthAndYear.substring(3));
+		
+		System.out.println("Name: " + worker.getName());
+		System.out.println("Department: " + worker.getDepartment().getName());
+		System.out.println("Income for "+ monthAndYear + ": " + String.format("%.2f", worker.income(year, month)));
 		sc.close();
 
 	}

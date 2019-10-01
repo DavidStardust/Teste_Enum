@@ -11,9 +11,9 @@ public class Worker {
 	//atributos básicos
 	private String name;
 	private WorkerLevel level;
-	private double baseSalary;
+	private Double baseSalary;
 
-	//associações
+	//associações, um departamento e vários contratos
 	private Department department;
 	private List<HourContract> contracts = new ArrayList<>();
 	
@@ -64,23 +64,23 @@ public class Worker {
 		return contracts;
 	}
 	
-	public void addContratct(HourContract contract) {
+	public void addContract(HourContract contract) {
 		contracts.add(contract);
 	}
 	
-	public void removeContratct(HourContract contract) {
+	public void removeContract(HourContract contract) {
 		contracts.remove(contract);
 	}
 	
 	public double income(int year, int month) {
 		double sum = baseSalary;
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(); //instanciar o calendário
 		for (HourContract c : contracts) {
 			cal.setTime(c.getDate());
 			int c_year = cal.get(Calendar.YEAR);
 			int c_month = 1 + cal.get(Calendar.MONTH);
 			if(year == c_year && month == c_month) {
-			sum += c.totalValue();
+				sum += c.totalValue();
 			}
 		}
 		return sum;
